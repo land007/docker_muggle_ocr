@@ -75,7 +75,12 @@ class IndexHandler(tornado.web.RequestHandler):
   </body>
 </html>
 ''')
-    
+
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
     def post(self):
         ret = {'result': 'OK'}
         upload_path = os.path.join(os.path.dirname(__file__), 'imgs')  # 文件的暂存路径
